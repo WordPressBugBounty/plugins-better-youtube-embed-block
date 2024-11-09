@@ -4,9 +4,11 @@
  * Description:       Embed YouTube videos without slowing down your site.
  * Requires at least: 6.3
  * Requires PHP:      7.0
- * Version:           1.1.0
+ * Version:           1.1.1
  * Author:            Phi Phan
  * Author URI:        https://boldblocks.net
+ * Plugin URI:        https://boldblocks.net?utm_source=BYEB&utm_campaign=visit+site&utm_medium=link&utm_content=Plugin+URI
+ * License:           GPL-3.0
  *
  * @package BoldBlocks
  * @copyright Copyright(c) 2022, Phi Phan
@@ -108,7 +110,7 @@ function better_youtube_embed_block_render_block( $args ) {
 			$params['rel'] = 0;
 		}
 
-		$data_params = $params ? ' data-params="' . esc_attr( json_encode( $params ) ) . '"' : '';
+		$data_params = $params ? ' data-params="' . esc_attr( wp_json_encode( $params ) ) . '"' : '';
 
 		$output = '<figure class="wp-block-boldblocks-youtube-block"' . $style . '><div id="yb-video-' . $video_id . '" class="yb-player" data-video-id="' . $video_id . '" data-title="Play"' . $data_params . ' style="background-image:url(' . esc_attr( $thumbnail_url ) . ')"><button type="button" class="yb-btn-play"><span class="visually-hidden">Play</span></button></div>' . $caption . '</figure>';
 
@@ -126,6 +128,7 @@ function better_youtube_embed_block_render_block( $args ) {
 	}
 
 	if ( $args['echo'] ) {
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo $output;
 	} else {
 		return $output;

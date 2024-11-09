@@ -3,17 +3,17 @@ Contributors:      mr2p
 Tags:              block, Gutenberg, youtube, embed, video
 Requires PHP:      7.0.0
 Requires at least: 6.3
-Tested up to:      6.6
-Stable tag:        1.1.0
+Tested up to:      6.7
+Stable tag:        1.1.1
 License:           GPL-3.0
 License URI:       https://www.gnu.org/licenses/gpl-3.0.html
 Donate link:       https://boldblocks.net/?utm_source=wp.org&utm_campaign=readme&utm_medium=link&utm_content=BYEB+Donate
 
-Embed YouTube videos without slowing down your site. Easily embed one or multiple videos, shorts, and playlists. Support custom thumbnails, aspect ratio, loop mode, and showing related videos from the same channel.
+Embed YouTube videos without slowing down your site. Easily embed one or multiple videos, shorts, and playlists.
 
 == Description ==
 
-The default embed block for Youtube videos sucks. It slows down your site. The more videos on the page the more it slow. This single-block plugin fixes that.
+The default embed block for YouTube videos sucks. It slows down your site. The more videos on the page the more it slow. This single-block plugin fixes that.
 
 Why this block is better than the default one:
 
@@ -60,19 +60,19 @@ On iOS, browsers like Safari and Chrome require two clicks to play videos. If yo
 
         define('BYEB_FORCE_IFRAME_ON_UNSUPPORTED_BROWSERS', true);
 
-Please check out this [page](https://contentblocksbuilder.com/video-tutorials/?utm_source=wp.org&utm_campaign=readme&utm_medium=link&utm_content=BYEB) to see how fast it helps. The page contains around 30 embedded Youtube videos but they don't slow down the page.
+Please check out this [page](https://contentblocksbuilder.com/video-tutorials/?utm_source=wp.org&utm_campaign=readme&utm_medium=link&utm_content=BYEB) to see how fast it helps. The page contains around 30 embedded YouTube videos but they don't slow down the page.
 
 If this plugin is useful for you, please do a quick review and [rate it](https://wordpress.org/support/plugin/better-youtube-embed-block/reviews/#new-post) on WordPress.org to help us spread the word. I would very much appreciate it.
 
 Please check out my other plugins if you're interested:
 
-* [Content Blocks Builder](https://wordpress.org/plugins/content-blocks-builder) - A tool to create blocks, patterns or variations easily for your site directly on the Block Editor.
-* [Meta Field Block](https://wordpress.org/plugins/display-a-meta-field-as-block) - A block to display a meta field or an ACF field as a block. It can also be used in the Query Loop block.
-* [Block Enhancements](https://wordpress.org/plugins/block-enhancements) - A plugin to add more useful features to blocks like icons, box-shadow, transform, hover style etc.
-* [Icon Separator](https://wordpress.org/plugins/icon-separator) - A tiny block just like the core/separator block but with the ability to add an icon to it.
-* [SVG Block](https://wordpress.org/plugins/svg-block) - A block to insert inline SVG images easily and safely. It also bundles with more than 3000 icons and some common non-rectangular dividers.
-* [Counting Number Block](https://wordpress.org/plugins/counting-number-block) - A block to display a number that has the number-counting effect.
-* [Breadcrumb Block](https://wordpress.org/plugins/breadcrumb-block) - A simple breadcrumb trail block that supports JSON-LD structured data.
+- **[Content Blocks Builder](https://wordpress.org/plugins/content-blocks-builder)** - This plugin turns the Block Editor into a powerful page builder by allowing you to create blocks, variations, and patterns directly in the Block Editor without needing a code editor.
+- **[Meta Field Block](https://wordpress.org/plugins/display-a-meta-field-as-block)** - A block to display custom fields as blocks on the front end. It supports custom fields for posts, terms, users, and setting fields. It can also be used in the Query Loop block.
+- **[SVG Block](https://wordpress.org/plugins/svg-block)** - A block to display SVG images as blocks. Useful for images, icons, dividers, and buttons. It allows you to upload SVG images and load them into the icon library.
+- **[Icon separator](https://wordpress.org/plugins/icon-separator)** - A tiny block just like the core/separator block but with the ability to add an icon.
+- **[Breadcrumb Block](https://wordpress.org/plugins/breadcrumb-block)** - A simple breadcrumb trail block that supports JSON-LD structured data and is compatible with WooCommerce.
+- **[Block Enhancements](https://wordpress.org/plugins/block-enhancements)** - Adds practical features to blocks like icons, box shadows, transforms, etc.
+- **[Counting Number Block](https://wordpress.org/plugins/counting-number-block)** - A block to display numbers with a counting effect
 
 The plugin is developed using @wordpress/create-block.
 
@@ -94,7 +94,16 @@ Anyone can use this plugin.
 
 == Screenshots ==
 
+1. Block edit screen
+
+2. Block settings
+
 == Changelog ==
+
+= 1.1.0 =
+*Release Date - 09 November 2024*
+
+* Fixed - a CSS conflict between the play button and button styles in some themes
 
 = 1.1.0 =
 *Release Date - 23 August 2024*
