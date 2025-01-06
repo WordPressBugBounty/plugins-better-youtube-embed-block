@@ -2,9 +2,9 @@
 /**
  * Plugin Name:       Better YouTube Embed Block
  * Description:       Embed YouTube videos without slowing down your site.
- * Requires at least: 6.3
+ * Requires at least: 6.5
  * Requires PHP:      7.0
- * Version:           1.1.1
+ * Version:           1.1.2
  * Author:            Phi Phan
  * Author URI:        https://boldblocks.net
  * Plugin URI:        https://boldblocks.net?utm_source=BYEB&utm_campaign=visit+site&utm_medium=link&utm_content=Plugin+URI
@@ -149,11 +149,25 @@ add_filter(
 			return $block_content;
 		}
 
-		$attrs = $block['attrs'] ?? [];
+		// Get the url.
+		$url = $block['attrs']['url'] ?? '';
+		if ( ! $url ) {
+			return $block_content;
+		}
+
+		// Get the caption.
+		$block_reader = new \WP_HTML_Tag_Processor( $block_content );
+
+		$caption = '';
+		if ( $block_reader->next_tag( 'figcaption' ) ) {
+			$block_reader->next_token();
+			$caption = $block_reader->get_modifiable_text();
+		}
+
 		return better_youtube_embed_block_render_block(
 			[
-				'url'     => $attrs['url'] ?? '',
-				'caption' => $attrs['caption'] ?? '',
+				'url'     => $url,
+				'caption' => $caption,
 			]
 		);
 	},

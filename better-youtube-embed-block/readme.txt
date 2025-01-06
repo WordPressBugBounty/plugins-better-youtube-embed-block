@@ -2,9 +2,9 @@
 Contributors:      mr2p
 Tags:              block, Gutenberg, youtube, embed, video
 Requires PHP:      7.0.0
-Requires at least: 6.3
+Requires at least: 6.5
 Tested up to:      6.7
-Stable tag:        1.1.1
+Stable tag:        1.1.2
 License:           GPL-3.0
 License URI:       https://www.gnu.org/licenses/gpl-3.0.html
 Donate link:       https://boldblocks.net/?utm_source=wp.org&utm_campaign=readme&utm_medium=link&utm_content=BYEB+Donate
@@ -100,7 +100,13 @@ Anyone can use this plugin.
 
 == Changelog ==
 
-= 1.1.0 =
+= 1.1.2 =
+*Release Date - 06 January 2025*
+
+* Fixed   - The captions of old YouTube videos are not converted to this block when automatically transforming core/embed to this block.
+* Updated - Requires at least WordPress version 6.5
+
+= 1.1.1 =
 *Release Date - 09 November 2024*
 
 * Fixed - a CSS conflict between the play button and button styles in some themes
