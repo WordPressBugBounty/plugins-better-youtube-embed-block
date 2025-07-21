@@ -31,6 +31,10 @@
       "type": "boolean",
       "__experimentalRole": "content"
     },
+    "thumbnailFormat": {
+      "type": "string",
+      "default": ""
+    },
     "customThumbnail": {
       "type": "string",
       "__experimentalRole": "content"

@@ -3,8 +3,8 @@ Contributors:      mr2p
 Tags:              block, Gutenberg, youtube, embed, video
 Requires PHP:      7.0.0
 Requires at least: 6.5
-Tested up to:      6.7
-Stable tag:        1.1.2
+Tested up to:      6.8
+Stable tag:        1.1.3
 License:           GPL-3.0
 License URI:       https://www.gnu.org/licenses/gpl-3.0.html
 Donate link:       https://boldblocks.net/?utm_source=wp.org&utm_campaign=readme&utm_medium=link&utm_content=BYEB+Donate
@@ -41,6 +41,7 @@ The example with all the parameters is:
             'url'               => 'https://youtu.be/paSXmpHU9K4',
             'aspectRatio'       => '16/9',
             'isMaxResThumbnail' => false,
+            'thumbnailFormat'   => 'jpg',
             'caption'           => 'My awesome video',
             'customThumbnail'   => 'https://example.com/bg.jpg',
             'settings'          => ['loop' => 1, 'rel' => 0],
@@ -99,6 +100,11 @@ Anyone can use this plugin.
 2. Block settings
 
 == Changelog ==
+
+= 1.1.3 =
+*Release Date - 21 July 2025*
+
+* Added - Support for loading WebP thumbnails to reduce file size.
 
 = 1.1.2 =
 *Release Date - 06 January 2025*

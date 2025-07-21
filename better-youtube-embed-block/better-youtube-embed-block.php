@@ -4,7 +4,7 @@
  * Description:       Embed YouTube videos without slowing down your site.
  * Requires at least: 6.5
  * Requires PHP:      7.0
- * Version:           1.1.2
+ * Version:           1.1.3
  * Author:            Phi Phan
  * Author URI:        https://boldblocks.net
  * Plugin URI:        https://boldblocks.net?utm_source=BYEB&utm_campaign=visit+site&utm_medium=link&utm_content=Plugin+URI
@@ -48,6 +48,7 @@ function better_youtube_embed_block_render_block( $args ) {
 			'url'               => '',
 			'caption'           => '',
 			'isMaxResThumbnail' => false,
+			'thumbnailFormat'   => 'jpg',
 			'aspectRatio'       => '',
 			'customThumbnail'   => '',
 			'settings'          => [],
@@ -69,7 +70,9 @@ function better_youtube_embed_block_render_block( $args ) {
 		$image_name    = $args['isMaxResThumbnail'] ? 'maxresdefault' : 'hqdefault';
 		$caption       = $args['caption'] ? '<figcaption class="yb-caption">' . esc_html( $args['caption'] ) . '</figcaption>' : '';
 		$aspect_ratio  = $args['aspectRatio'];
-		$thumbnail_url = $args['customThumbnail'] ? $args['customThumbnail'] : 'https://img.youtube.com/vi/' . $video_id . '/' . $image_name . '.jpg';
+		$folder        = 'webp' === $args['thumbnailFormat'] ? 'vi_webp' : 'vi';
+		$extension     = 'webp' === $args['thumbnailFormat'] ? 'webp' : 'jpg';
+		$thumbnail_url = $args['customThumbnail'] ? $args['customThumbnail'] : 'https://img.youtube.com/' . $folder . '/' . $video_id . '/' . $image_name . '.' . $extension;
 		$style         = '';
 		if ( $aspect_ratio ) {
 			if ( preg_match( '/(\d+)(\/(\d+))*/', $aspect_ratio, $aspect_ratio_matches ) ) {
@@ -184,7 +187,7 @@ if ( defined( 'BYEB_FORCE_IFRAME_ON_UNSUPPORTED_BROWSERS' ) && BYEB_FORCE_IFRAME
 		function( $block_content ) {
 			$block_reader = new \WP_HTML_Tag_Processor( $block_content );
 			if ( $block_reader->next_tag() ) {
-				$block_reader->add_class( 'force-iframe' );
+				$block_reader->add_class( 'ifr-unsupported' );
 			}
 			return $block_reader->get_updated_html();
 		},
