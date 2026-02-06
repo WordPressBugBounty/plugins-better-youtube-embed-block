@@ -2,9 +2,9 @@
 /**
  * Plugin Name:       Better YouTube Embed Block
  * Description:       Embed YouTube videos without slowing down your site.
- * Requires at least: 6.5
+ * Requires at least: 6.9
  * Requires PHP:      7.0
- * Version:           1.1.3
+ * Version:           1.1.4
  * Author:            Phi Phan
  * Author URI:        https://boldblocks.net
  * Plugin URI:        https://boldblocks.net?utm_source=BYEB&utm_campaign=visit+site&utm_medium=link&utm_content=Plugin+URI
@@ -14,6 +14,9 @@
  * @copyright Copyright(c) 2022, Phi Phan
  */
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Registers the block using the metadata loaded from the `block.json` file.
  * Behind the scenes, it registers also all assets so they can be enqueued
@@ -22,9 +25,77 @@
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
 function better_youtube_embed_block_init() {
-	register_block_type( __DIR__ . '/build' );
+	register_block_type(
+		__DIR__ . '/build',
+		[
+			'render_callback' => function ( $attributes, $content, $block_instance ) {
+				$url = better_youtube_embed_block_get_binding_value( 'url', $attributes, $block_instance );
+				if ( is_null( $url ) ) {
+					return $content;
+				}
+
+				$caption = better_youtube_embed_block_get_binding_value( 'caption', $attributes, $block_instance );
+				if ( is_null( $caption ) ) {
+					$block_reader = new \WP_HTML_Tag_Processor( $content );
+					if ( $block_reader->next_tag( 'figcaption' ) ) {
+						$caption = '';
+						while ( $block_reader->next_token() ) {
+							if ( '#text' === $block_reader->get_token_name() ) {
+								$caption .= $block_reader->get_modifiable_text();
+							}
+						}
+					}
+				}
+
+				return better_youtube_embed_block_render_block(
+					array_merge(
+						$attributes,
+						[
+							'url'     => $url,
+							'caption' => $caption,
+						]
+					)
+				);
+			},
+		]
+	);
 }
 add_action( 'init', 'better_youtube_embed_block_init' );
+
+/**
+ * Get binding value for an attribute
+ *
+ * @param string   $attribute_name
+ * @param array    $attributes
+ * @param WP_Block $block_instance
+ * @return mixed|null
+ */
+function better_youtube_embed_block_get_binding_value( $attribute_name, $attributes, $block_instance ) {
+	$block_binding = $attributes['metadata']['bindings'][ $attribute_name ] ?? [];
+
+	if ( ! $block_binding || ! isset( $block_binding['source'] ) || ! is_string( $block_binding['source'] ) ) {
+		return null;
+	}
+
+	$block_binding_source = get_block_bindings_source( $block_binding['source'] );
+	if ( null === $block_binding_source ) {
+		return null;
+	}
+
+	$source_args = ! empty( $block_binding['args'] ) && is_array( $block_binding['args'] ) ? $block_binding['args'] : [];
+	return $block_binding_source->get_value( $source_args, $block_instance, $attribute_name );
+}
+
+/**
+ * Allow binding URL and caption from a custom field
+ */
+add_filter(
+	'block_bindings_supported_attributes_boldblocks/youtube-block',
+	function ( $attributes ) {
+		$attributes = [ 'url', 'caption' ];
+		return $attributes;
+	}
+);
 
 /**
  * The API to render a YouTube video URL as a better youtube embed block
@@ -143,11 +214,12 @@ function better_youtube_embed_block_render_block( $args ) {
  */
 add_filter(
 	'render_block_core/embed',
-	function( $block_content, $block ) {
+	function ( $block_content, $block ) {
 		if ( 'youtube' !== ( $block['attrs']['providerNameSlug'] ?? '' ) ) {
 			return $block_content;
 		}
 
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		if ( ! apply_filters( 'byeb_speed_up_youtube_videos', defined( 'BYEB_SPEED_UP_YOUTUBE_VIDEOS' ) && BYEB_SPEED_UP_YOUTUBE_VIDEOS ) ) {
 			return $block_content;
 		}
@@ -163,8 +235,11 @@ add_filter(
 
 		$caption = '';
 		if ( $block_reader->next_tag( 'figcaption' ) ) {
-			$block_reader->next_token();
-			$caption = $block_reader->get_modifiable_text();
+			while ( $block_reader->next_token() ) {
+				if ( '#text' === $block_reader->get_token_name() ) {
+					$caption .= $block_reader->get_modifiable_text();
+				}
+			}
 		}
 
 		return better_youtube_embed_block_render_block(
@@ -184,7 +259,7 @@ add_filter(
 if ( defined( 'BYEB_FORCE_IFRAME_ON_UNSUPPORTED_BROWSERS' ) && BYEB_FORCE_IFRAME_ON_UNSUPPORTED_BROWSERS ) {
 	add_filter(
 		'render_block_boldblocks/youtube-block',
-		function( $block_content ) {
+		function ( $block_content ) {
 			$block_reader = new \WP_HTML_Tag_Processor( $block_content );
 			if ( $block_reader->next_tag() ) {
 				$block_reader->add_class( 'ifr-unsupported' );

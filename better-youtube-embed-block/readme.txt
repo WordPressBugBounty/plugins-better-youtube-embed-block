@@ -1,10 +1,10 @@
-=== YouTube Block - A better way to embed YouTube videos, shorts, playlists ===
+=== Better YouTube Block - A better way to embed YouTube videos, shorts, playlists ===
 Contributors:      mr2p
 Tags:              block, Gutenberg, youtube, embed, video
-Requires PHP:      7.0.0
-Requires at least: 6.5
-Tested up to:      6.8
-Stable tag:        1.1.3
+Requires PHP:      7.0
+Requires at least: 6.9
+Tested up to:      6.9
+Stable tag:        1.1.4
 License:           GPL-3.0
 License URI:       https://www.gnu.org/licenses/gpl-3.0.html
 Donate link:       https://boldblocks.net/?utm_source=wp.org&utm_campaign=readme&utm_medium=link&utm_content=BYEB+Donate
@@ -79,7 +79,7 @@ The plugin is developed using @wordpress/create-block.
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/better-youtube-embed-block` directory, or install the plugin through the WordPress plugins screen directly.
+1. Upload the plugin files to the `/wp-content/plugins` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
 
 
@@ -100,6 +100,12 @@ Anyone can use this plugin.
 2. Block settings
 
 == Changelog ==
+
+= 1.1.4 =
+*Release Date - 06 January 2026*
+
+* Added    - Block binding support for the url and caption attributes.
+* Improved - Handling of the frontend script when hosts or cache plugins defer or delay it.
 
 = 1.1.3 =
 *Release Date - 21 July 2025*
