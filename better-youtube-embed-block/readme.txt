@@ -1,10 +1,10 @@
-=== Better YouTube Block - A better way to embed YouTube videos, shorts, playlists ===
+=== Better YouTube Block - Fast Embed Videos, Shorts & Playlists ===
 Contributors:      mr2p
 Tags:              block, Gutenberg, youtube, embed, video
 Requires PHP:      7.0
 Requires at least: 6.9
-Tested up to:      6.9
-Stable tag:        1.1.4
+Tested up to:      7.0
+Stable tag:        1.1.5
 License:           GPL-3.0
 License URI:       https://www.gnu.org/licenses/gpl-3.0.html
 Donate link:       https://boldblocks.net/?utm_source=wp.org&utm_campaign=readme&utm_medium=link&utm_content=BYEB+Donate
@@ -43,6 +43,7 @@ The example with all the parameters is:
             'isMaxResThumbnail' => false,
             'thumbnailFormat'   => 'jpg',
             'caption'           => 'My awesome video',
+            'caption_kses'      => false,
             'customThumbnail'   => 'https://example.com/bg.jpg',
             'settings'          => ['loop' => 1, 'rel' => 0],
             'echo'              => false,
@@ -100,6 +101,13 @@ Anyone can use this plugin.
 2. Block settings
 
 == Changelog ==
+
+= 1.1.5 =
+*Release Date - 06 May 2026*
+
+* Added    - `caption_kses` parameter to the helper function, allowing inline HTML tags (`<a>`, `<em>`, `<strong>`) in video captions when using the custom API function.
+* Added    - New hook `better_youtube_embed_block_render_block_args` to modify the helper function parameters.
+* Improved - Updated setting controls for compatibility with WordPress 7.0
 
 = 1.1.4 =
 *Release Date - 06 January 2026*

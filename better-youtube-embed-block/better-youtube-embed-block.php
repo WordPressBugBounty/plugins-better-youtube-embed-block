@@ -4,7 +4,7 @@
  * Description:       Embed YouTube videos without slowing down your site.
  * Requires at least: 6.9
  * Requires PHP:      7.0
- * Version:           1.1.4
+ * Version:           1.1.5
  * Author:            Phi Phan
  * Author URI:        https://boldblocks.net
  * Plugin URI:        https://boldblocks.net?utm_source=BYEB&utm_campaign=visit+site&utm_medium=link&utm_content=Plugin+URI
@@ -103,6 +103,7 @@ add_filter(
  * @param array   $args {
  *   @param string  $url: YouTube video URL
  *   @param string  $caption: The video caption
+ *   @param boolean $caption_kses: Whether to allow inline tags (a, em, strong) in the caption
  *   @param boolean $isMaxResThumbnail: Load high-resolution image or not
  *   @param string  $aspectRatio: 1, 2, 4/3, 9/16, etc.
  *   @param string  $customThumbnail: The URL of a custom image
@@ -118,6 +119,7 @@ function better_youtube_embed_block_render_block( $args ) {
 		[
 			'url'               => '',
 			'caption'           => '',
+			'caption_kses'      => false,
 			'isMaxResThumbnail' => false,
 			'thumbnailFormat'   => 'jpg',
 			'aspectRatio'       => '',
@@ -126,6 +128,9 @@ function better_youtube_embed_block_render_block( $args ) {
 			'echo'              => false,
 		]
 	);
+
+	// Allow changing the args.
+	$args = apply_filters( 'better_youtube_embed_block_render_block_args', $args );
 
 	$url      = $args['url'] ?? '';
 	$video_id = '';
@@ -139,7 +144,20 @@ function better_youtube_embed_block_render_block( $args ) {
 	if ( $video_id ) {
 		$video_id      = esc_attr( $video_id );
 		$image_name    = $args['isMaxResThumbnail'] ? 'maxresdefault' : 'hqdefault';
-		$caption       = $args['caption'] ? '<figcaption class="yb-caption">' . esc_html( $args['caption'] ) . '</figcaption>' : '';
+		$caption       = $args['caption'] ? '<figcaption class="yb-caption">' . ( $args['caption_kses'] ? wp_kses(
+			$args['caption'],
+			[
+				'em'     => [],
+				'strong' => [],
+				'a'      => [
+					'href'   => true,
+					'target' => true,
+					'rel'    => true,
+					'title'  => true,
+					'class'  => true,
+				],
+			]
+		) : esc_html( $args['caption'] ) ) . '</figcaption>' : '';
 		$aspect_ratio  = $args['aspectRatio'];
 		$folder        = 'webp' === $args['thumbnailFormat'] ? 'vi_webp' : 'vi';
 		$extension     = 'webp' === $args['thumbnailFormat'] ? 'webp' : 'jpg';
@@ -249,7 +267,7 @@ add_filter(
 			]
 		);
 	},
-	10,
+	1000,
 	2
 );
 
