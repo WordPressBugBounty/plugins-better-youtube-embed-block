@@ -1,10 +1,10 @@
-=== Better YouTube Block - Fast Embed Videos, Shorts & Playlists ===
+=== Embed YouTube Block - Fast Loading Videos, Shorts & Playlists ===
 Contributors:      mr2p
 Tags:              block, Gutenberg, youtube, embed, video
 Requires PHP:      7.0
 Requires at least: 6.9
 Tested up to:      7.0
-Stable tag:        1.1.5
+Stable tag:        1.1.6
 License:           GPL-3.0
 License URI:       https://www.gnu.org/licenses/gpl-3.0.html
 Donate link:       https://boldblocks.net/?utm_source=wp.org&utm_campaign=readme&utm_medium=link&utm_content=BYEB+Donate
@@ -68,8 +68,8 @@ If this plugin is useful for you, please do a quick review and [rate it](https:/
 
 Please check out my other plugins if you're interested:
 
-- **[Content Blocks Builder](https://wordpress.org/plugins/content-blocks-builder)** - This plugin turns the Block Editor into a powerful page builder by allowing you to create blocks, variations, and patterns directly in the Block Editor without needing a code editor.
-- **[Meta Field Block](https://wordpress.org/plugins/display-a-meta-field-as-block)** - A block to display custom fields as blocks on the front end. It supports custom fields for posts, terms, users, and setting fields. It can also be used in the Query Loop block.
+- **[Content Blocks Builder](https://wordpress.org/plugins/content-blocks-builder)** - Build custom layouts and blocks visually in the Block Editor without needing a code editor, using only core blocks and native Gutenberg features.
+- **[Meta Field Block](https://wordpress.org/plugins/display-a-meta-field-as-block)** - A single block to display custom fields in the Block Editor without coding. It supports ACF, MetaBox, WooCommerce, meta, rest field, shortcode and more. Works everywhere: in the Site Editor (FSE), the Block Editor, inside Query Loop, WooCommerce Product Collection, Term Query blocks, and even in template files.
 - **[SVG Block](https://wordpress.org/plugins/svg-block)** - A block to display SVG images as blocks. Useful for images, icons, dividers, and buttons. It allows you to upload SVG images and load them into the icon library.
 - **[Icon separator](https://wordpress.org/plugins/icon-separator)** - A tiny block just like the core/separator block but with the ability to add an icon.
 - **[Breadcrumb Block](https://wordpress.org/plugins/breadcrumb-block)** - A simple breadcrumb trail block that supports JSON-LD structured data and is compatible with WooCommerce.
@@ -101,6 +101,11 @@ Anyone can use this plugin.
 2. Block settings
 
 == Changelog ==
+
+= 1.1.6 =
+*Release Date - 10 June 2026*
+
+* Added - Support for displaying overlay text on video thumbnails, such as a YouTube cookie consent notice
 
 = 1.1.5 =
 *Release Date - 06 May 2026*
