@@ -3,8 +3,8 @@ Contributors:      mr2p
 Tags:              block, Gutenberg, youtube, embed, video
 Requires PHP:      7.0
 Requires at least: 6.9
-Tested up to:      7.0
-Stable tag:        1.1.6
+Tested up to:      7.1
+Stable tag:        1.1.7
 License:           GPL-3.0
 License URI:       https://www.gnu.org/licenses/gpl-3.0.html
 Donate link:       https://boldblocks.net/?utm_source=wp.org&utm_campaign=readme&utm_medium=link&utm_content=BYEB+Donate
@@ -101,6 +101,13 @@ Anyone can use this plugin.
 2. Block settings
 
 == Changelog ==
+
+= 1.1.7 =
+*Release Date - 23 September 2026*
+
+* Fixed    - Fixed an issue where the first v character was removed when inputting a video URL in the https://youtu.be/v... format
+* Improved - Allowed the block to work in Query Loops with async pagination enabled
+* Fixed    - Preserved the bound value when automatically converting a core/embed block to this block
 
 = 1.1.6 =
 *Release Date - 10 June 2026*

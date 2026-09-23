@@ -4,7 +4,7 @@
  * Description:       Embed YouTube Block - Fast Loading Videos, Shorts & Playlists
  * Requires at least: 6.9
  * Requires PHP:      7.0
- * Version:           1.1.6
+ * Version:           1.1.7
  * Author:            Phi Phan
  * Author URI:        https://boldblocks.net
  * Plugin URI:        https://boldblocks.net?utm_source=BYEB&utm_campaign=visit+site&utm_medium=link&utm_content=Plugin+URI
@@ -135,7 +135,7 @@ function better_youtube_embed_block_render_block( $args ) {
 	$url      = $args['url'] ?? '';
 	$video_id = '';
 	if ( $url ) {
-		$regex = '/(youtu.*be.*)\/(watch\?v=|embed\/|v|shorts|)(.*?((?=[&#?])|$))/';
+		$regex = '/(youtu.*be.*)\/(watch\?v=|embed\/|v\/|shorts|)(.*?((?=[&#?])|$))/';
 		if ( preg_match( $regex, $url, $matches ) ) {
 			$video_id = $matches[3];
 		}
@@ -203,11 +203,11 @@ function better_youtube_embed_block_render_block( $args ) {
 		}
 
 		// Overlay.
-		$has_overlay = ( $settings['showOverlayText'] ?? false ) && !! ( $settings['overlayText'] ?? '' );
-		$play_label = __("Play", "better-youtube-embed-block");
+		$has_overlay   = ( $settings['showOverlayText'] ?? false ) && (bool) ( $settings['overlayText'] ?? '' );
+		$play_label    = __( 'Play', 'better-youtube-embed-block' );
 		$overlay_class = '';
 		if ( $has_overlay ) {
-			$play_label = $settings['overlayText'];
+			$play_label    = $settings['overlayText'];
 			$overlay_class = ' has-overlay';
 		}
 
@@ -241,7 +241,7 @@ function better_youtube_embed_block_render_block( $args ) {
  */
 add_filter(
 	'render_block_core/embed',
-	function ( $block_content, $block ) {
+	function ( $block_content, $block, $block_instance ) {
 		if ( 'youtube' !== ( $block['attrs']['providerNameSlug'] ?? '' ) ) {
 			return $block_content;
 		}
@@ -252,7 +252,7 @@ add_filter(
 		}
 
 		// Get the url.
-		$url = $block['attrs']['url'] ?? '';
+		$url = $block_instance->attributes['url'] ?? '';
 		if ( ! $url ) {
 			return $block_content;
 		}
@@ -277,7 +277,7 @@ add_filter(
 		);
 	},
 	1000,
-	2
+	3
 );
 
 /**
